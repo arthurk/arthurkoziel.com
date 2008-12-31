@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+  "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <title>{% block pretitle %}{% endblock %}Arthur Koziel’s Blog</title>
+  <link rel="stylesheet" href="{{ MEDIA_URL }}css/blueprint/screen.css" type="text/css" media="screen, projection">
+  <link rel="stylesheet" href="{{ MEDIA_URL }}css/blueprint/print.css" type="text/css" media="print"> 
+  <!--[if IE]>
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/blueprint/ie.css" type="text/css" media="screen, projection">
+  <![endif]-->
+  <link rel="stylesheet" href="{{ MEDIA_URL }}css/base_20081225.css" type="text/css" media="all">
+  <link rel="alternate" type="application/rss+xml" title="Latest Entries" href="/feeds/entries/">
+  <link rel="openid.server" href="http://www.myopenid.com/server">
+  <link rel="openid.delegate" href="http://arthr.myopenid.com/">
+  {% block extrahead %}
+  {% endblock %}
+</head>
+<body class="showgridd">
+  <div class="container">
+    <div class="span-6" id="header">
+      <p id="intro">The Blog of</p>
+      <h1><a href="/">Arthur Koziel</a></h1>
+      <p id="nav">
+        <a href="/about/">About</a> • 
+        <a href="/archive/">Archives</a>
+      </p>
+      {% block extra_header %}
+      {% endblock %}
+    </div>
+    <div class="span-12 last" id="content">
+      {% block content %}
+      {% endblock %}
+    </div>
+  </div>
+  <script type="text/javascript">
+  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+  <script type="text/javascript">
+  var pageTracker = _gat._getTracker("UA-4143429-1");
+  pageTracker._initData();
+  pageTracker._trackPageview();
+  </script>
+</body>
+</html>

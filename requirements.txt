@@ -1,0 +1,6 @@
+Django==1.0.2-final
+Fabric==0.0.9
+Markdown==2.0-beta-2
+Pygments==1.0
+tagging==0.3-pre
+threadedcomments==0.4

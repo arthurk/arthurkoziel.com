@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% load threadedcommentstags %}
+
+{% block content %}
+    {% if comment %}
+        <div id="comment_preview">{% auto_transform_markup comment %}</div>
+    {% endif %}
+    <form method="POST" action="" class="replyform">
+      <p>
+        <label for="id_name">Name</label> <input id="id_name" type="text" name="name" maxlength="128" value="{{ form.name.data }}">
+        {% if form.name.errors %}
+          <span class="error">{{ form.name.errors|join:", " }}</span>
+        {% endif %}
+      </p>
+      <p>
+        <label for="id_website">Website (optional)</label> <input id="id_website" type="text" name="website" maxlength="200" value="{{ form.website.data }}">
+        {% if form.website.errors %}
+          <span class="error">{{ form.website.errors|join:", " }}</span>
+        {% endif %}
+      </p>
+      <p>
+        <label for="id_email">E-mail (optional)</label> <input id="id_email" type="text" name="email" maxlength="75" value="{{ form.email.data }}">
+        {% if form.email.errors %}
+          <span class="error">{{ form.email.errors|join:", " }}</span>
+        {% endif %}
+      </p>
+      <p>
+        <label for="id_comment">Comment</label> 
+        {% if form.comment.errors %}
+          <span class="error">{{ form.comment.errors|join:", " }}</span>
+        {% endif %}
+        <textarea id="id_comment" rows="10" cols="40" name="comment">{{ form.comment.data }}</textarea>
+      </p>
+      <p><input type="submit" value="Submit Comment" /></p>
+
+      <input type="hidden" name="next" value="{{ next }}">
+    </form>
+{% endblock %}

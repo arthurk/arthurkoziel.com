@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block pretitle %}
+  Archives — 
+{% endblock %}
+
+{% block content %}
+  <h2>Archives</h2>
+  <h3 id="archive_search">Search via Google</h3>
+  <form method="get" action="http://www.google.com/search" id="archive_search">
+    <p><input type="text" name="q" value="">
+    <input type="hidden" value="arthurkoziel.com" name="domains">
+    <input type="hidden" value="arthurkoziel.com" name="sitesearch">
+    <input type="submit" name="search" value="Go"></p>
+  </form>
+
+  <h3>By tag</h3>
+  {% load tagging_tags %}
+  {% tag_cloud_for_model blog.Entry as entry_tags %}
+  <p>
+  {% for entry_tag in entry_tags %}
+     <a class="size-{{ entry_tag.font_size }}" href="{% url tag_list entry_tag %}" title="Used {{ entry_tag.count }} times">{{ entry_tag }}</a>
+  {% endfor %}
+  </p>
+
+  <h3>By date</h3>
+  <dl>
+  {% for entry in object_list %}
+    {% ifchanged entry.get_month %}
+      <dt>{{ entry.created_at|date:"M Y" }}</dt>
+    {% endifchanged %}
+    <dd><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a></dd>
+  {% endfor %}
+  </dl>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block pretitle %}
+  Archive for tag "{{ tag }}" —
+{% endblock %}
+
+{% block content %}
+<h2>Archive for tag "{{ tag }}"</h2>
+{% for object in object_list %}
+  {% load threadedcommentstags %}
+  {% load tagging_tags %}
+  {% load humanize %}
+
+  {% get_free_comment_count for object as comment_count %}
+  {% tags_for_object object as tags %}
+
+  <div class="entry">
+    <h2><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></h2>
+    <p>
+      {{ object.created_at|naturalday|capfirst }} • 
+      <a href="{{ object.get_absolute_url }}#comments">{{ comment_count|apnumber }} comment{{ comment_count|pluralize }}</a>
+      {% if tags %}
+        •
+        {% for tag in tags %}
+          <a href="{% url tag_list tag %}">{{ tag }}</a>{% if not forloop.last %},{% endif %}
+        {% endfor %}
+      {% endif %}
+    </p>
+  </div>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,5 @@
+{% if obj.body_html %}
+  {{ obj.body_html|safe }}
+{% else %}
+  {{ obj.body|safe }}
+{% endif %}

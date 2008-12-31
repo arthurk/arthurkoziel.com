@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block pretitle %}
+  {{ object.title }} —
+{% endblock %}
+
+{% block extrahead %}
+  {% if object.enable_comments %}
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js" type="text/javascript"></script>
+  <script src="{{ MEDIA_URL }}js/threadedcomments.js" type="text/javascript"></script>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  {% load threadedcommentstags %}
+  
+  <div class="entry">
+    <h2>{{ object.title }}</h2>
+    <p class="date">Published {{ object.created_at|date:"F j, Y" }}</p>
+    {% if object.body_html %}
+      {{ object.body_html|safe }}
+    {% else %}
+      {{ object.body|safe }}
+    {% endif %}
+  </div>
+  
+  <h3 id="comments">Comments</h3>
+  {% get_free_threaded_comment_tree for object as tree %}
+  
+  {% if tree %}
+    <dl id="comments_list">
+    {% for comment in tree %}
+      <dt class="depth-{{ comment.depth }}" id="comment-{{ comment.pk }}"><strong>
+      {% if comment.website %}
+        <a href="{{ comment.website }}">{{ comment.name }}</a>
+      {% else %} 
+        {{ comment.name }}
+      {% endif %}</strong>
+      on {{ comment.date_submitted|date:"F j, Y" }}
+      </dt>
+      <dd class="depth-{{ comment.depth }}">{% auto_transform_markup comment %}
+        {% if object.enable_comments %}
+          <p><a class="replylink" id="c{{ comment.id }}" href="javascript:show_reply_form('c{{ comment.id }}',
+          '{% get_free_comment_url object comment %}',
+          '{{ comment.name }}')">Reply</a></p>
+        {% endif %}
+      </dd>
+    {% endfor %}
+    </dl>
+  {% endif %}
+    
+    
+  {% if object.enable_comments %}
+    <h4 id="reply">Reply</h4>
+    <form method="POST" action="{% get_free_comment_url object %}" class="replyform">
+      <p>
+        <label for="id_name">Name</label> 
+        <input id="id_name" type="text" name="name" maxlength="128">
+      </p>          
+      <p>
+        <label for="id_website">Website (optional)</label> 
+        <input id="id_website" type="text" name="website" maxlength="200">
+      </p>
+      <p>
+        <label for="id_email">E-mail (optional)</label> 
+        <input id="id_email" type="text" name="email" maxlength="75"></p>
+      <p>
+        <label for="id_comment">Comment</label> 
+        <textarea id="id_comment" rows="10" cols="40" name="comment"></textarea>
+      </p>
+      <input type="hidden" name="next" value="{{ object.get_absolute_url }}#reply">
+      <p><input type="submit" value="Submit Comment"></p>
+    </form>
+  {% else %}
+    <h4>Sorry, comments are closed.</h4>
+  {% endif %}
+{% endblock %}

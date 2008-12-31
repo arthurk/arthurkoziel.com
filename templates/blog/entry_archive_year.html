@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block pretitle %}
+  Archive for {{ year }} —
+{% endblock %}
+
+{% block content %}
+<h2>Archive for {{ year }}</h2>
+<dl>
+  {% for entry in object_list %}
+    {% ifchanged entry.get_month %}
+      <dt>{{ entry.created_at|date:"M" }}</dt>
+    {% endifchanged %}
+    <dd><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a></dd>
+  {% endfor %}
+</dl>
+{% endblock %}
+
