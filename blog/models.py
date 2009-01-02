@@ -30,7 +30,7 @@ class Entry(models.Model):
     
     title = models.CharField(max_length=200, help_text='Maximum 250 characters.')
     body = models.TextField()
-    body_html = models.TextField(blank=True, null=True, editable=False)
+    body_html = models.TextField(blank=True, default="", editable=False)
     format = models.IntegerField(choices=FORMAT_CHOICES, default=MARKDOWN_FORMAT)
     
     # Metadata
@@ -59,8 +59,6 @@ class Entry(models.Model):
     def save(self):
         if self.format == self.MARKDOWN_FORMAT:
             self.body_html = markdown(self.body, ['codehilite(css_class=highlight)',])
-        else:
-            self.body_html = ""
         super(Entry, self).save()
     
     @models.permalink
