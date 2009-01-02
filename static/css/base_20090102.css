@@ -12,6 +12,8 @@ h2 {
   margin:0;
 }
 
+.date { color: #999; font-weight:bold;}
+
 pre, code, tt {font-family:mono-space,monospace; font-size:1.2em;}
 
 a:focus, a:hover {color:#c33;text-decoration:underline;}
