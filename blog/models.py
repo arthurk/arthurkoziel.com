@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -41,11 +43,13 @@ class Entry(models.Model):
     status = models.IntegerField(choices=STATUS_CHOICES, default=DRAFT_STATUS,
                                  help_text='Only entries with "Live" status will be publicly displayed.')
     tags = TagField(help_text="Seperate tags with spaces.")
-    created_at = models.DateTimeField(auto_now_add=True, 
+    
+    # date fields
+    created_at = models.DateTimeField(default=datetime.now,
                                       help_text="Auto-filled when field is created.")
-    updated_at = models.DateTimeField(auto_now=True, 
-                                      help_text="Auto-updated when field is saved.")
+    updated_at = models.DateTimeField(help_text="Auto-updated when field is saved.")
 
+    # managers
     objects = models.Manager()
     live = LiveEntryManager()
 
@@ -57,6 +61,7 @@ class Entry(models.Model):
         return self.title
     
     def save(self):
+        self.updated_at = datetime.now()
         if self.format == self.MARKDOWN_FORMAT:
             self.body_html = markdown(self.body, ['codehilite(css_class=highlight)',])
         super(Entry, self).save()
