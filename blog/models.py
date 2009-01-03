@@ -77,6 +77,13 @@ class Entry(models.Model):
     def get_month(self):
         """Returns the month"""
         return self.created_at.month
+    
+    def edited(self):
+        """
+        Returns True if the Entry has been edited at least one day after the 
+        creation.
+        """
+        return (self.updated_at - self.created_at).days > 1
 
 def moderate_comment(sender, instance, **kwargs):
     """Checks with Akismet if a comment is spam"""

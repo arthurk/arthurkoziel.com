@@ -16,7 +16,10 @@
   
   <div class="entry">
     <h2>{{ object.title }}</h2>
-    <p class="date">Published {{ object.created_at|date:"F j, Y" }}</p>
+    <p class="date">
+      Published {{ object.created_at|date:"F j, Y" }}
+      {% if object.edited %} (last edited: {{object.updated_at|date:"F j, Y" }}) {% endif %}
+    </p>
     {% if object.body_html %}
       {{ object.body_html|safe }}
     {% else %}
