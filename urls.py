@@ -23,6 +23,8 @@ sitemaps = {
     'tags': TagSitemap(),
 }
 
+handler500 = 'shellfish.views.server_error'
+
 urlpatterns = patterns('',
     # sitemap
     (r'^sitemap.xml$', 
@@ -72,10 +74,10 @@ urlpatterns = patterns('',
     (r'', include('shellfish.blog.urls')),
 )
 
-# Use static serve with "site_media" directory if DEBUG is set to True
 if settings.DEBUG:
-  urlpatterns += patterns('django.views.static',
-	  (r'^static/(?P<path>.*)$', 'serve', {
-            'document_root': os.path.join(settings.PROJECT_PATH, 'static'),
-	        'show_indexes': True }),
-	  )
+    urlpatterns += patterns('',
+	    (r'^static/(?P<path>.*)$', 'django.views.static.serve', 
+	        { 'document_root': os.path.join(settings.PROJECT_PATH, 'static'),
+	          'show_indexes': True }),
+	    (r'^500/$', 'shellfish.views.server_error'),
+    )
