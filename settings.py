@@ -78,9 +78,8 @@ INSTALLED_APPS = (
     'tagging',
 )
 
-COMMENTS_APP='comments'
-COMMENTS_HIDE_REMOVED=True
-
+# django-threadedcomments
+DEFAULT_MARKUP = 1
 DEFAULT_MAX_COMMENT_LENGTH = 2000
 DEFAULT_MAX_COMMENT_DEPTH = 6
 
