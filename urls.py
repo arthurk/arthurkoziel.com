@@ -79,5 +79,6 @@ if settings.DEBUG:
 	    (r'^static/(?P<path>.*)$', 'django.views.static.serve', 
 	        { 'document_root': os.path.join(settings.PROJECT_PATH, 'static'),
 	          'show_indexes': True }),
+	    (r'^400/$', 'django.views.defaults.page_not_found'),
 	    (r'^500/$', 'shellfish.views.server_error'),
     )
