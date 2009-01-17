@@ -4,7 +4,7 @@ from django.conf import settings
 from django.conf.urls.defaults import *
 from django.contrib import admin
 
-from shellfish.blog.feeds import LatestEntriesFeed, TagFeed, LatestCommentsFeed
+from shellfish.blog.feeds import LatestEntriesFeed, TagFeed
 from shellfish.blog.models import Entry
 from shellfish.blog.sitemaps import BlogSitemap, TagSitemap
 from shellfish.sitemaps import GlobalSitemap
