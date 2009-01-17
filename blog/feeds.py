@@ -5,7 +5,6 @@ from django.contrib.syndication.feeds import Feed
 
 from shellfish.blog.models import Entry
 from tagging.models import Tag, TaggedItem
-from threadedcomments.models import FreeThreadedComment
 
 current_site = Site.objects.get_current()
 
@@ -48,24 +47,3 @@ class TagFeed(LatestEntriesFeed):
     
     def link(self, obj):
         return "/feeds/tag/%s/" % obj.name
-
-class LatestCommentsFeed(LatestEntriesFeed):
-    description = "Latest comments posted to %s" % current_site.name
-    link = "/feeds/comments/"
-    title = "%s: Latest comments" % current_site.name
-    
-    def items(self):
-        return FreeThreadedComment.public.all()[:15]
-
-    def item_pubdate(self, item):
-        return item.date_submitted
-    
-    def item_link(self, item):
-        return "%s#comment-%s" % (item.get_content_object().get_absolute_url(),
-                                  item.pk)
-    
-    def item_guid(self, item):
-        return "tag:%s,%s:%s#comment-%s" % (current_site.domain,
-                                            item.date_submitted.strftime('%Y-%m-%d'),
-                                            item.get_content_object().get_absolute_url(),
-                                            item.pk)

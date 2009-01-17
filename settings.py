@@ -74,14 +74,8 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'django.contrib.sitemaps',
     'shellfish.blog',
-    'threadedcomments',
     'tagging',
 )
-
-# django-threadedcomments
-DEFAULT_MARKUP = 1
-DEFAULT_MAX_COMMENT_LENGTH = 2000
-DEFAULT_MAX_COMMENT_DEPTH = 6
 
 try:
     from settings_local import *

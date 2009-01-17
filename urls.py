@@ -12,8 +12,7 @@ from shellfish.sitemaps import GlobalSitemap
 admin.autodiscover()
 
 feeds = {'entries': LatestEntriesFeed, 
-         'tag': TagFeed,
-         'comments': LatestCommentsFeed}
+         'tag': TagFeed,}
 
 archive_dict = {'queryset': Entry.live.all(),}
 
@@ -34,9 +33,6 @@ urlpatterns = patterns('',
     # admin
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^admin/(.*)', admin.site.root),
-    
-    # comments
-    (r'^threadedcomments/', include('threadedcomments.urls')),
     
     # feeds
     (r'^feeds/(?P<url>.*)/$', 
@@ -79,6 +75,6 @@ if settings.DEBUG:
 	    (r'^static/(?P<path>.*)$', 'django.views.static.serve', 
 	        { 'document_root': os.path.join(settings.PROJECT_PATH, 'static'),
 	          'show_indexes': True }),
-	    (r'^400/$', 'django.views.defaults.page_not_found'),
+	    (r'^404/$', 'django.views.defaults.page_not_found'),
 	    (r'^500/$', 'shellfish.views.server_error'),
     )

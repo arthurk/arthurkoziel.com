@@ -7,18 +7,17 @@
 {% block content %}
 <h2>Archive for {{ day|date:"F j, Y" }}</h2>
 {% for object in object_list %}
-  {% load threadedcommentstags %}
   {% load tagging_tags %}
   {% load humanize %}
 
-  {% get_free_comment_count for object as comment_count %}
   {% tags_for_object object as tags %}
 
   <div class="entry">
     <h2><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></h2>
     <p>
       {{ object.created_at|naturalday|capfirst }} • 
-      <a href="{{ object.get_absolute_url }}#comments">{{ comment_count|apnumber }} comment{{ comment_count|pluralize }}</a>
+      <a href="{{ object.get_absolute_url }}#disqus_thread">View Comments</a>
+      
       {% if tags %}
         •
         {% for tag in tags %}
@@ -28,4 +27,18 @@
     </p>
   </div>
 {% endfor %}
+<script type="text/javascript">
+//<![CDATA[
+(function() {
+		var links = document.getElementsByTagName('a');
+		var query = '?';
+		for(var i = 0; i < links.length; i++) {
+			if(links[i].href.indexOf('#disqus_thread') >= 0) {
+				query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+			}
+		}
+		document.write('<script type="text/javascript" src="http://disqus.com/forums/arthurkozielsblog/get_num_replies.js' + query + '"></' + 'script>');
+	})();
+//]]>
+</script>
 {% endblock %}

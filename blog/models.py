@@ -2,16 +2,9 @@ from datetime import datetime
 
 from django.db import models
 from django.conf import settings
-from django.contrib.auth.models import User
-from django.contrib.sites.models import Site
-from django.core.mail import mail_managers
-from django.db.models import signals
-from django.utils.encoding import smart_str
 
-from akismet import Akismet
 from markdown import markdown
 from tagging.fields import TagField
-from threadedcomments.models import FreeThreadedComment
 
 
 class LiveEntryManager(models.Manager):
@@ -84,37 +77,3 @@ class Entry(models.Model):
         creation.
         """
         return (self.updated_at - self.created_at).days > 1
-
-def moderate_comment(sender, instance, **kwargs):
-    """Checks with Akismet if a comment is spam"""
-    if not instance.id:
-        entry = instance.get_content_object()
-        
-        if not entry.enable_comments:
-            instance.moderation_disallowed = True
-            return
-            
-        akismet_api = Akismet(key=settings.AKISMET_API_KEY,
-                              blog_url="http://%s/" % Site.objects.get_current().domain)
-
-        if akismet_api.verify_key():
-            akismet_data = { 'comment_type': 'comment',
-                             'referrer': '',
-                             'user_ip': instance.ip_address,
-                             'user_agent': '', }
-            
-            # comment_check returns True for spam
-            if akismet_api.comment_check(smart_str(instance.comment),
-                                         akismet_data,
-                                         build_data=True):
-                instance.is_public = False
-
-def post_save_moderation(sender, instance, **kwargs):
-    """Delete comments from entries which are marked as enable_comments=False"""
-    entry = instance.get_content_object()
-    if hasattr(instance, 'moderation_disallowed'):
-                instance.delete()
-                return
-                
-signals.pre_save.connect(moderate_comment, sender=FreeThreadedComment)
-signals.post_save.connect(post_save_moderation, sender=FreeThreadedComment)
