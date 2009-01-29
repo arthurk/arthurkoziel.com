@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-<h2>Archive for tag "{{ tag }}"</h2>
+<h2>Archive for tag "{{ tag }}" <a href="/feeds/tag/{{ tag }}/">(rss feed)</a></h2>
 {% for object in object_list %}
   {% load tagging_tags %}
   {% load humanize %}

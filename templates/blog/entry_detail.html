@@ -4,15 +4,15 @@
   {{ object.title }} —
 {% endblock %}
 
-{% block extrahead %}
-{% endblock %}
-
 {% block content %}  
+  {% if not object.is_published %}
+    <div class="box">This entry is currently unpublished.</div>
+  {% endif %}
+
   <div class="entry">
     <h2>{{ object.title }}</h2>
     <p class="date">
       Published {{ object.created_at|date:"F j, Y" }}
-      {% if object.edited %} (last edited: {{object.updated_at|date:"F j, Y" }}) {% endif %}
     </p>
     {% if object.body_html %}
       {{ object.body_html|safe }}

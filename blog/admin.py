@@ -1,11 +1,8 @@
 from django.contrib import admin
 
-from shellfish.blog.models import Entry
-
+from shellfish.blog.models import Entry, Page
 
 class EntryAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ("title",)}
-        
     fieldsets = (
         (None, {
             'fields': ('title', 'format', 'body', 'status', 'tags')
@@ -16,9 +13,22 @@ class EntryAdmin(admin.ModelAdmin):
         }),
     )
     
-    search_fields = ['title',]
-    
     list_display = ('__unicode__', 'status', 'created_at',)
     list_filter = ('status', 'enable_comments', 'created_at')
+    prepopulated_fields = {"slug": ("title",)}
+    search_fields = ['title',]
     
+class PageAdmin(admin.ModelAdmin):
+    fieldsets = (
+        (None, {
+            'fields': ('title', 'slug', 'format', 'body', 'status')
+        }),
+    )
+    
+    list_display = ('__unicode__', 'status', 'created_at',)
+    list_filter = ('status', 'created_at')
+    prepopulated_fields = {"slug": ("title",)}
+    search_fields = ['title',]
+
 admin.site.register(Entry, EntryAdmin)
+admin.site.register(Page, PageAdmin)

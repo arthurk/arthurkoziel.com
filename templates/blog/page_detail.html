@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block pretitle %}
+  {{ object.title }} —
+{% endblock %}
+
+{% block content %}  
+  {% if not object.is_published %}
+    <div class="box">This page is currently unpublished.</div>
+  {% endif %}
+
+  <h2>{{ object.title }}</h2>
+  {% if object.body_html %}
+    {{ object.body_html|safe }}
+  {% else %}
+    {{ object.body|safe }}
+  {% endif %}
+{% endblock %}

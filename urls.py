@@ -14,7 +14,7 @@ admin.autodiscover()
 feeds = {'entries': LatestEntriesFeed, 
          'tag': TagFeed,}
 
-archive_dict = {'queryset': Entry.live.all(),}
+archive_dict = {'queryset': Entry.objects.live(),}
 
 sitemaps = {
     'global': GlobalSitemap(),
@@ -37,12 +37,7 @@ urlpatterns = patterns('',
     # feeds
     (r'^feeds/(?P<url>.*)/$', 
         'django.contrib.syndication.views.feed',
-        { 'feed_dict': feeds }),
-    
-    # static pages
-    (r'^about/$', 
-        'django.views.generic.simple.direct_to_template', 
-        {'template': 'about.html'}),
+        {'feed_dict': feeds}),
     
     # tags
     (r'^tags/$', 
@@ -50,7 +45,7 @@ urlpatterns = patterns('',
         {'url': '/archive/'}),
     (r'^tags/(?P<tag>[-\w]+)/$', 
         'tagging.views.tagged_object_list', 
-        {'queryset_or_model': Entry.live.all(), 
+        {'queryset_or_model': Entry.objects.live(), 
          'template_name': 'blog/entry_archive_tag.html'},
         'tag_list'),
     
@@ -75,6 +70,4 @@ if settings.DEBUG:
 	    (r'^static/(?P<path>.*)$', 'django.views.static.serve', 
 	        { 'document_root': os.path.join(settings.PROJECT_PATH, 'static'),
 	          'show_indexes': True }),
-	    (r'^404/$', 'django.views.defaults.page_not_found'),
-	    (r'^500/$', 'shellfish.views.server_error'),
     )

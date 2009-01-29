@@ -18,7 +18,7 @@ class LatestEntriesFeed(Feed):
     title = "%s: Latest entries" % current_site.name
     
     def items(self):
-        return Entry.live.all()[:15]
+        return Entry.objects.live()[:15]
     
     def item_pubdate(self, item):
         return item.created_at
@@ -43,7 +43,7 @@ class TagFeed(LatestEntriesFeed):
                                                                            obj.name)
 
     def items(self, obj):
-        return TaggedItem.objects.get_by_model(Entry.live, obj)[:15]
+        return TaggedItem.objects.get_by_model(Entry.objects.live(), obj)[:15]
     
     def link(self, obj):
         return "/feeds/tag/%s/" % obj.name
