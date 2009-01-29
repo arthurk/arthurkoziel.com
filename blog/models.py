@@ -54,7 +54,9 @@ class Content(models.Model):
     def save(self, force_insert=False, force_update=False):
         self.updated_at = datetime.now()
         if self.format == self.MARKDOWN_FORMAT:
-            self.body_html = markdown(self.body, ['codehilite(css_class=highlight)',])
+            self.body_html = markdown(self.body, 
+                                      ['codehilite(css_class=highlight)',],
+                                      output_format='html4')
         super(Content, self).save(force_insert, force_update)
 
     def is_published(self):
