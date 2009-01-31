@@ -9,6 +9,9 @@ from tagging.models import Tag, TaggedItem
 current_site = Site.objects.get_current()
 
 class LatestEntriesFeed(Feed):
+    """
+    Feed showing the latest Entries.
+    """
     author_name = "Arthur Koziel"
     description = "Latest entries posted to %s" % current_site.name
     feed_type = Atom1Feed
@@ -28,7 +31,10 @@ class LatestEntriesFeed(Feed):
                                  item.created_at.strftime('%Y-%m-%d'),
                                  item.get_absolute_url())
 
-class TagFeed(LatestEntriesFeed):    
+class TagFeed(LatestEntriesFeed):
+    """
+    Feed showing all Entries associated to a Tag.
+    """ 
     def get_object(self, bits):
         if len(bits) != 1:
             raise ObjectDoesNotExist

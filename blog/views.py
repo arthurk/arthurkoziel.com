@@ -4,9 +4,10 @@ from shellfish.blog.models import Entry, Page
 
 def entry_detail(request, year, month, day, slug):
     """
-    View that wraps the date_based object_detail generic view but
-    passes a QuerySet that distinguishes between authenticated and 
-    not authenticated users.
+    Detail view of an ``Entry``.
+    
+    This view is a wrapper around the generic ``date_based.object_detail`` 
+    view.
     """
     return date_based.object_detail(request,
                                     year=year,
@@ -19,9 +20,10 @@ def entry_detail(request, year, month, day, slug):
 
 def page_detail(request, slug):
     """
-    View that wraps the list_detail object_detail generic view but
-    passes a QuerySet that distinguishes between authenticated and 
-    not authenticated users.
+    Detail view of a ``Page``.
+    
+    This view is a wrapper around the generic ``list_detail.object_detail`` 
+    view.
     """
     return list_detail.object_detail(request,
                                      queryset=Page.objects.privileged(request.user),

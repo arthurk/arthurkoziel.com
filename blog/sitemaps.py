@@ -1,16 +1,24 @@
 from django.contrib.sitemaps import Sitemap
 from django.core.urlresolvers import reverse
 
-from shellfish.blog.models import Entry
+from shellfish.blog.models import Entry, Page
 
 from tagging.models import Tag
 
-
-class BlogSitemap(Sitemap):
+class EntrySitemap(Sitemap):
     changefreq = "daily"
     
     def items(self):
-        return Entry.live.all()
+        return Entry.objects.live()
+
+    def lastmod(self, obj):
+        return obj.updated_at
+
+class PageSitemap(Sitemap):
+    changefreq = "daily"
+    
+    def items(self):
+        return Page.objects.live()
 
     def lastmod(self, obj):
         return obj.updated_at

@@ -14,8 +14,7 @@
   <link rel="alternate" type="application/rss+xml" title="Latest Entries" href="/feeds/entries/">
   <link rel="openid.server" href="http://www.myopenid.com/server">
   <link rel="openid.delegate" href="http://arthr.myopenid.com/">
-  {% block extrahead %}
-  {% endblock %}
+  {% load disqus_tags %}{% disqus_dev %}
 </head>
 <body class="showgridd">
   <div class="container">
@@ -26,8 +25,6 @@
         <a href="/about/">About</a> • 
         <a href="/archive/">Archives</a>
       </p>
-      {% block extra_header %}
-      {% endblock %}
     </div>
     <div class="span-12 last" id="content">
       {% block content %}

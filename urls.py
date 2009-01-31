@@ -6,22 +6,24 @@ from django.contrib import admin
 
 from shellfish.blog.feeds import LatestEntriesFeed, TagFeed
 from shellfish.blog.models import Entry
-from shellfish.blog.sitemaps import BlogSitemap, TagSitemap
+from shellfish.blog.sitemaps import EntrySitemap, PageSitemap, TagSitemap
 from shellfish.sitemaps import GlobalSitemap
 
 admin.autodiscover()
 
-feeds = {'entries': LatestEntriesFeed, 
-         'tag': TagFeed,}
-
-archive_dict = {'queryset': Entry.objects.live(),}
+feeds = {
+    'entries': LatestEntriesFeed, 
+    'tag': TagFeed
+}
 
 sitemaps = {
     'global': GlobalSitemap(),
-    'blog': BlogSitemap(),
+    'entries': EntrySitemap(),
+    'pages': PageSitemap(),
     'tags': TagSitemap(),
 }
 
+# custom handler for HTTP 500 errors
 handler500 = 'shellfish.views.server_error'
 
 urlpatterns = patterns('',
@@ -48,11 +50,6 @@ urlpatterns = patterns('',
         {'queryset_or_model': Entry.objects.live(), 
          'template_name': 'blog/entry_archive_tag.html'},
         'tag_list'),
-    
-    # archives
-    (r'^archive/$', 
-        'django.views.generic.list_detail.object_list', 
-        archive_dict),
     
     # redirect for old feed url's
     (r'^feed/', 

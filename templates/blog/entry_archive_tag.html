@@ -4,12 +4,11 @@
   Archive for tag "{{ tag }}" —
 {% endblock %}
 
+{% load tagging_tags humanize disqus_tags %}
+
 {% block content %}
 <h2>Archive for tag "{{ tag }}" <a href="/feeds/tag/{{ tag }}/">(rss feed)</a></h2>
 {% for object in object_list %}
-  {% load tagging_tags %}
-  {% load humanize %}
-
   {% tags_for_object object as tags %}
 
   <div class="entry">
@@ -26,18 +25,5 @@
     </p>
   </div>
 {% endfor %}
-<script type="text/javascript">
-//<![CDATA[
-(function() {
-		var links = document.getElementsByTagName('a');
-		var query = '?';
-		for(var i = 0; i < links.length; i++) {
-			if(links[i].href.indexOf('#disqus_thread') >= 0) {
-				query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
-			}
-		}
-		document.write('<script type="text/javascript" src="http://disqus.com/forums/arthurkozielsblog/get_num_replies.js' + query + '"></' + 'script>');
-	})();
-//]]>
-</script>
+{% disqus_num_replies %}
 {% endblock %}

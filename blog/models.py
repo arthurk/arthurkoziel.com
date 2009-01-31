@@ -12,7 +12,6 @@ class Content(models.Model):
     """
     An abstract base class for all models which display content.
     """
-    
     LIVE_STATUS, DRAFT_STATUS = range(1, 3)
     STATUS_CHOICES = (
         (LIVE_STATUS, 'Live'),
@@ -23,7 +22,6 @@ class Content(models.Model):
         (HTML_FORMAT, 'HTML'),
         (MARKDOWN_FORMAT, 'Markdown')
     )
-    
     title = models.CharField(max_length=200, help_text='Maximum 250 characters.')
     body = models.TextField()
     body_html = models.TextField(blank=True, null=True, editable=False)
@@ -70,16 +68,16 @@ class Entry(Content):
     class Meta(Content.Meta):
         verbose_name_plural = 'Entries'
     
-    @models.permalink
     def get_absolute_url(self):
         return ('shellfish_blog_entry_detail', (), { 
                     'year': self.created_at.strftime("%Y"),
                     'month': self.created_at.strftime("%m"),
                     'day': self.created_at.strftime("%d"),
                     'slug': self.slug})
+    get_absolute_url = models.permalink(get_absolute_url)
 
-class Page(Content):    
-    @models.permalink
+class Page(Content):
     def get_absolute_url(self):
         return ('shellfish_blog_page_detail', (), {'slug': self.slug})
+    get_absolute_url = models.permalink(get_absolute_url)
     

@@ -1,17 +1,22 @@
 from django.db import models
 
+
 class ContentManager(models.Manager):
-    
+    """
+    Custom manager for the ``Content`` model.
+    """
     def live(self):
         """
-        QuerySet for all live content.
+        Returns a ``QuerySet`` of all Content which has the ``LIVE_STATUS`` 
+        status.
         """
         return self.filter(status=self.model.LIVE_STATUS)
 
     def privileged(self, user):
         """
-        QuerySet with all content (live+drafts) for logged-in users
-        and only live content for users who are not authenticated.
+        Returns a ``QuerySet`` of all Content which has the ``LIVE_STATUS`` 
+        status if the user is not authenticated or all Content records 
+        if the user is authenticated.
         """
         if user.is_authenticated():
             return self.all()

@@ -77,7 +77,11 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
     'shellfish.blog',
     'tagging',
+    'django_disqus'
 )
+
+# django-disqus
+DISQUS_WEBSITE_SHORTNAME = ''
 
 try:
     from settings_local import *
