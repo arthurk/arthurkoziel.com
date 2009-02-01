@@ -55,6 +55,8 @@ class Content(models.Model):
             self.body_html = markdown(self.body, 
                                       ['codehilite(css_class=highlight)',],
                                       output_format='html4')
+        else:
+            self.body_html = ''
         super(Content, self).save(force_insert, force_update)
 
     def is_published(self):
