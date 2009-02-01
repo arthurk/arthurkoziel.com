@@ -1,29 +1,4 @@
-{% extends "base.html" %}
+{% extends "blog/entry_archive.html" %}
 
-{% block pretitle %}
-  Archive for {{ day|date:"F j, Y" }} —
-{% endblock %}
-
-{% load tagging_tags humanize disqus_tags %}
-
-{% block content %}
-<h2>Archive for {{ day|date:"F j, Y" }}</h2>
-{% for object in object_list %}
-  {% tags_for_object object as tags %}
-
-  <div class="entry">
-    <h2><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></h2>
-    <p>
-      {{ object.created_at|naturalday|capfirst }} • 
-      <a href="{{ object.get_absolute_url }}#disqus_thread">View Comments</a>
-      {% if tags %}
-        •
-        {% for tag in tags %}
-          <a href="{% url tag_list tag %}">{{ tag }}</a>{% if not forloop.last %},{% endif %}
-        {% endfor %}
-      {% endif %}
-    </p>
-  </div>
-{% endfor %}
-{% disqus_num_replies %}
-{% endblock %}
+{% block pretitle %}Archive for {{ day|date:"F j, Y" }} —{% endblock %}
+{% block archive_title %}<h2>Archive for {{ day|date:"F j, Y" }}</h2>{% endblock %}

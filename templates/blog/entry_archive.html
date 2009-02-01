@@ -1,11 +1,14 @@
 {% extends "base.html" %}
 
-{% block content %}
 {% load tagging_tags humanize disqus_tags %}
-{% for object in latest %}  
-  {% tags_for_object object as tags %}
-  <div class="entry">
-    <h2><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></h2>
+
+{% block content %}
+  {% block archive_title %}{% endblock %}
+  
+  {% for object in object_list %}
+    {% tags_for_object object as tags %}
+
+    <h2 class="bottom"><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></h2>
     <p>
       {{ object.created_at|naturalday|capfirst }} • 
       <a href="{{ object.get_absolute_url }}#disqus_thread">View Comments</a>
@@ -16,7 +19,6 @@
         {% endfor %}
       {% endif %}
     </p>
-  </div>
-{% endfor %}
+  {% endfor %}
 {% disqus_num_replies %}
 {% endblock %}

@@ -1,52 +1,21 @@
-body { 
-  margin-top:1.5em;
-  font-family:"Lucida Grande", "Bitstream Vera Sans", Helvetica, Arial, sans-serif;
-  color:#333
-}
-
-h2 {
-  line-height:1;
-}
-
-.entry h2 {
-  margin:0;
-}
-
-.date { color: #999; font-weight:bold;}
-
-pre, code, tt {font-family:mono-space,monospace; font-size:1.2em;}
-
-a:focus, a:hover {color:#c33;text-decoration:underline;}
-a {color:#36c;text-decoration:none;}
-a.size-1 {font-size: 1em;}
-a.size-2 {font-size: 1.2em;}
-a.size-3 {font-size: 1.4em;}
-a.size-4 {font-size: 1.6em;}
-a.size-5 {font-size: 1.8em;}
-a.size-6 {font-size: 2em;}
-
-.container {margin:0 0 0 40px;}
-
-#header {
-  text-align:right;
-}
-  #intro {
-    font-weight: bold;    
-    margin:0;
-  }
-  #header h1 {
-    font-family: "Georgia";
-    margin: 0 0 0.15em 0;
-  }
-    #header h1 a {
-      color:#999;
-      text-decoration:none;
-    }
-#content {
-  margin:0 -25px 1.5em 25px;
-}
-
-/* syntax highlighting */
+#content{margin:0 -25px 1.5em 25px}
+#header{text-align:right}
+#header h1{font-family:"Georgia";margin:0 0 .15em}
+#header h1 a{color:#999;text-decoration:none}
+#intro{font-weight:700;margin:0}
+.container{margin:0 0 0 40px}
+.date{color:#999;font-weight:700}
+a{color:#36c;text-decoration:none}
+a.size-1{font-size:1em}
+a.size-2{font-size:1.2em}
+a.size-3{font-size:1.4em}
+a.size-4{font-size:1.6em}
+a.size-5{font-size:1.8em}
+a.size-6{font-size:2em}
+a:focus,a:hover{color:#c33;text-decoration:underline}
+body{color:#333;font-family:"Lucida Grande", "Bitstream Vera Sans", Helvetica, Arial, sans-serif;margin-top:1.5em}
+h2{line-height:1}
+pre,code,tt{font-family:mono-space,monospace;font-size:1.2em}
 pre{background-color:#f0f0f0;font-size:1.2em;border-top:1px solid #ccc;border-bottom:1px solid #ccc;overflow:auto;margin:0 0 1.5em;padding:.5em;font-family:mono-space,monospace}
 .highlight{background-color:#404040}
 .highlight .err{color:#a61717;background-color:#e3d2d2}

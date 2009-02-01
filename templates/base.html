@@ -10,8 +10,8 @@
   <!--[if IE]>
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/blueprint/ie.css" type="text/css" media="screen, projection">
   <![endif]-->
-  <link rel="stylesheet" href="{{ MEDIA_URL }}css/base_20090116.css" type="text/css" media="all">
-  <link rel="alternate" type="application/rss+xml" title="Latest Entries" href="/feeds/entries/">
+  <link rel="stylesheet" href="{{ MEDIA_URL }}css/base_20090201.css" type="text/css" media="all">
+  <link rel="alternate" type="application/rss+xml" title="Latest Entries" href="{% url shellfish_feeds "entries" %}">
   <link rel="openid.server" href="http://www.myopenid.com/server">
   <link rel="openid.delegate" href="http://arthr.myopenid.com/">
   {% load disqus_tags %}{% disqus_dev %}
@@ -20,10 +20,10 @@
   <div class="container">
     <div class="span-6" id="header">
       <p id="intro">The Blog of</p>
-      <h1><a href="/">Arthur Koziel</a></h1>
+      <h1><a href="{% url shellfish_blog_entry_archive_index %}">Arthur Koziel</a></h1>
       <p id="nav">
-        <a href="/about/">About</a> • 
-        <a href="/archive/">Archives</a>
+        <a href="{% url shellfish_blog_page_detail "about" %}">About</a> • 
+        <a href="{% url shellfish_blog_archive %}">Archives</a>
       </p>
     </div>
     <div class="span-12 last" id="content">
@@ -32,13 +32,13 @@
     </div>
   </div>
   <script type="text/javascript">
-  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
   </script>
   <script type="text/javascript">
-  var pageTracker = _gat._getTracker("UA-4143429-1");
-  pageTracker._initData();
-  pageTracker._trackPageview();
+    var pageTracker = _gat._getTracker("UA-4143429-1");
+    pageTracker._initData();
+    pageTracker._trackPageview();
   </script>
 </body>
 </html>

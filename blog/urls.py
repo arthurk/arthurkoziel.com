@@ -11,7 +11,7 @@ urlpatterns = patterns('',
     # Entries
     (r'^$',
         'django.views.generic.date_based.archive_index',
-        dict(all_dict, num_latest=10),
+        dict(all_dict, num_latest=10, template_object_name='object_list'),
         'shellfish_blog_entry_archive_index'),
     (r'^(?P<year>\d{4})/$',
         'django.views.generic.date_based.archive_year', 
