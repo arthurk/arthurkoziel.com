@@ -12,10 +12,11 @@ class Content(models.Model):
     """
     An abstract base class for all models which display content.
     """
-    LIVE_STATUS, DRAFT_STATUS = range(1, 3)
+    LIVE_STATUS, DRAFT_STATUS, HIDDEN_STATUS = range(1, 4)
     STATUS_CHOICES = (
         (LIVE_STATUS, 'Live'),
-        (DRAFT_STATUS, 'Draft')
+        (DRAFT_STATUS, 'Draft'),
+        (HIDDEN_STATUS, 'Hidden')
     )
     HTML_FORMAT, MARKDOWN_FORMAT = range(1, 3)
     FORMAT_CHOICES = (
@@ -61,6 +62,9 @@ class Content(models.Model):
 
     def is_published(self):
         return self.status == self.LIVE_STATUS
+    
+    def is_draft(self):
+        return self.status == self.DRAFT_STATUS
 
 class Entry(Content):
     enable_comments = models.BooleanField(default=True, 

@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.db.models import Q
 
 class ContentManager(models.Manager):
     """
@@ -21,4 +21,5 @@ class ContentManager(models.Manager):
         if user.is_authenticated():
             return self.all()
         else:
-            return self.live()
+            return self.exclude(status=self.model.DRAFT_STATUS)
+                               

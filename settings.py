@@ -77,7 +77,7 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
     'shellfish.blog',
     'tagging',
-    'django_disqus'
+    'disqus',
 )
 
 # django-disqus

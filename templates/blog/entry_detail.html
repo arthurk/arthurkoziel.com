@@ -4,8 +4,8 @@
 
 {% load disqus_tags %}
 
-{% block content %}  
-  {% if not object.is_published %}
+{% block content %}
+  {% if object.is_draft %}
     <div class="box">This entry is currently unpublished.</div>
   {% endif %}
 
