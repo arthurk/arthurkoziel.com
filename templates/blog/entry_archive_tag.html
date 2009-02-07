@@ -1,4 +1,9 @@
 {% extends "blog/entry_archive.html" %}
 
 {% block pretitle %}Archive for tag "{{ tag }}" —{% endblock %}
-{% block archive_title %}<h2>Archive for tag "{{ tag }}" <a href="{% url shellfish_feeds "tag" %}{{ tag }}/">(feed)</a></h2>{% endblock %}
+{% block archive_title %}
+  <h2 class="bottom">
+    Archive for tag &#8220;{{ tag }}&#8221; <a href="{% url shellfish_feeds "tag" %}{{ tag }}/">(feed)</a>
+  </h2>
+  <hr>
+{% endblock %}

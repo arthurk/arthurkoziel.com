@@ -1,4 +1,7 @@
 {% extends "blog/entry_archive.html" %}
 
 {% block pretitle %}Archive for {{ month|date:"F Y" }} —{% endblock %}
-{% block archive_title %}<h2>Archive for {{ month|date:"F Y" }}</h2>{% endblock %}
+{% block archive_title %}
+  <h2 class="bottom">Archive for {{ month|date:"F Y" }}</h2>
+  <hr>
+{% endblock %}

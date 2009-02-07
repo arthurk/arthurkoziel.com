@@ -25,6 +25,7 @@
         <a href="{% url shellfish_blog_page_detail "about" %}">About</a> • 
         <a href="{% url shellfish_blog_archive %}">Archives</a>
       </p>
+      {% block header_extra %}{% endblock %}
     </div>
     <div class="span-12 last" id="content">
       {% block content %}

@@ -3,7 +3,8 @@
 {% block pretitle %}Archives — {% endblock %}
 
 {% block content %}
-  <h2>Archives</h2>
+  <h2 class="bottom">Archives</h2>
+  <hr>
   <h3 id="archive_search">Search via Google</h3>
   <form method="get" action="http://www.google.com/search" id="archive_search">
     <p><input type="text" name="q" value="">
@@ -27,7 +28,7 @@
     <h3>By date</h3>
     <dl>
     {% for entry in object_list %}
-      {% ifchanged entry.get_month %}
+      {% ifchanged entry.created_at.month %}
         <dt>{{ entry.created_at|date:"M Y" }}</dt>
       {% endifchanged %}
       <dd><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a></dd>

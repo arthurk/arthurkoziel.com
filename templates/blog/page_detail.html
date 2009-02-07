@@ -9,7 +9,8 @@
     <div class="box">This page is currently unpublished.</div>
   {% endif %}
 
-  <h2>{{ object.title }}</h2>
+  <h2 class="bottom">{{ object.title }}</h2>
+  <hr>
   {% if object.body_html %}
     {{ object.body_html|safe }}
   {% else %}
