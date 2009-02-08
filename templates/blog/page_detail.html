@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}  
-  {% if not object.is_published %}
+  {% if object.is_draft %}
     <div class="box">This page is currently unpublished.</div>
   {% endif %}
 
