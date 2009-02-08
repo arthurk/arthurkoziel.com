@@ -7,6 +7,7 @@ from shellfish.blog.managers import ContentManager
 
 from markdown import markdown
 from tagging.fields import TagField
+from tagging.models import TaggedItem
 
 class Content(models.Model):
     """
@@ -45,6 +46,7 @@ class Content(models.Model):
     
     class Meta:
         abstract = True
+        get_latest_by = 'created_at'
         ordering = ['-created_at']
 
     def __unicode__(self):
@@ -65,7 +67,10 @@ class Content(models.Model):
     
     def is_draft(self):
         return self.status == self.DRAFT_STATUS
-
+    
+    def related(self):
+        return TaggedItem.objects.get_related(self, Entry.objects.live(), num=5)
+        
 class Entry(Content):
     enable_comments = models.BooleanField(default=True, 
                                           help_text="If checked, comments are enabled.")

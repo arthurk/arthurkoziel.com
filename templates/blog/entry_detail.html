@@ -29,6 +29,13 @@
     {% endif %}
   </div>
   <hr>
+  <h3>Related Entries</h3>
+  <ul>
+  {% for related_entry in object.related %}
+    <li><a href="{{ related_entry.get_absolute_url }}">{{ related_entry }}</a></li>
+  {% endfor %}
+  </ul>
+  <hr>
   <h3 id="comments">Comments</h3>
   {% disqus_show_comments %}
 {% endblock %}
