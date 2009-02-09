@@ -30,4 +30,4 @@ class TagSitemap(Sitemap):
         return Tag.objects.all()
     
     def location(self, obj):
-        return reverse('tag_list', None, (), {'tag': obj})
+        return reverse('tag_list', kwargs={'tag': obj})
