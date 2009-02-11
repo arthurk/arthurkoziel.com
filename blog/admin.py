@@ -21,7 +21,10 @@ class EntryAdmin(admin.ModelAdmin):
 class PageAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
-            'fields': ('title', 'slug', 'format', 'body', 'status')
+            'fields': ('title', 'slug', 'body', 'status',)
+        }),
+        ('Advanced', {
+            'fields': ('format', 'template',)
         }),
     )
     

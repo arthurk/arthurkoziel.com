@@ -1,4 +1,5 @@
 from datetime import datetime
+import os
 
 from django.db import models
 from django.conf import settings
@@ -88,6 +89,13 @@ class Entry(Content):
     get_absolute_url = models.permalink(get_absolute_url)
 
 class Page(Content):
+    # get page template files
+    path = os.path.join(settings.PROJECT_PATH, 'templates', 'blog', 'page')
+    files = [(os.path.join('blog', 'page', s), s) for s in os.listdir(path) 
+             if os.path.isfile(os.path.join(path, s))]
+
+    template = models.CharField(max_length=100, choices=files, default='blog/page/default.html')
+    
     def get_absolute_url(self):
         return ('shellfish_blog_page_detail', (), {'slug': self.slug})
     get_absolute_url = models.permalink(get_absolute_url)

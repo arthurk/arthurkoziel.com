@@ -27,4 +27,5 @@ def page_detail(request, slug):
     """
     return list_detail.object_detail(request,
                                      queryset=Page.objects.privileged(request.user),
-                                     slug=slug,)
+                                     slug=slug,
+                                     template_name_field='template',)
