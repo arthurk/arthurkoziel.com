@@ -4,13 +4,13 @@
 <html>
 <head>
   <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-  <title>{% block pretitle %}{% endblock %}Arthur Koziel’s Blog</title>
+  <title>{% block pretitle %}{% endblock %} Arthur Koziel</title>
   <link rel="stylesheet" href="{{ MEDIA_URL }}css/blueprint/screen.css" type="text/css" media="screen, projection">
   <link rel="stylesheet" href="{{ MEDIA_URL }}css/blueprint/print.css" type="text/css" media="print"> 
   <!--[if IE]>
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/blueprint/ie.css" type="text/css" media="screen, projection">
   <![endif]-->
-  <link rel="stylesheet" href="{{ MEDIA_URL }}css/base_20090201.css" type="text/css" media="all">
+  <link rel="stylesheet" href="{{ MEDIA_URL }}css/base_20090315.css" type="text/css" media="all">
   <link rel="alternate" type="application/rss+xml" title="Latest Entries" href="{% url shellfish_feeds "entries" %}">
   <link rel="openid.server" href="http://www.myopenid.com/server">
   <link rel="openid.delegate" href="http://arthr.myopenid.com/">
@@ -18,19 +18,8 @@
 </head>
 <body>
   <div class="container">
-    <div class="span-6" id="header">
-      <p id="intro">The Blog of</p>
-      <h1><a href="{% url shellfish_blog_entry_archive_index %}">Arthur Koziel</a></h1>
-      <p id="nav">
-        <a href="{% url shellfish_blog_page_detail "about" %}">About</a> • 
-        <a href="{% url shellfish_blog_archive %}">Archives</a>
-      </p>
-      {% block header_extra %}{% endblock %}
-    </div>
-    <div class="span-12 last" id="content">
-      {% block content %}
-      {% endblock %}
-    </div>
+    {% block container %}
+    {% endblock %}
   </div>
   <script type="text/javascript">
     var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");

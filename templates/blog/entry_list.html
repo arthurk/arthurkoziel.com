@@ -2,37 +2,51 @@
 
 {% block pretitle %}Archives — {% endblock %}
 
-{% block content %}
-  <h2 class="bottom">Archives</h2>
-  <hr>
-  <h3 id="archive_search">Search via Google</h3>
-  <form method="get" action="http://www.google.com/search" id="archive_search">
-    <p><input type="text" name="q" value="">
-    <input type="hidden" value="arthurkoziel.com" name="domains">
-    <input type="hidden" value="arthurkoziel.com" name="sitesearch">
-    <input type="submit" name="search" value="Go"></p>
-  </form>
-
-  {% load tagging_tags %}
-  {% tag_cloud_for_model blog.Entry as entry_tags %}
-  {% if entry_tags %}
-    <h3>By tag</h3>
-    <p>
-    {% for entry_tag in entry_tags %}
-      <a class="size-{{ entry_tag.font_size }}" href="{% url tag_list entry_tag %}" title="Used {{ entry_tag.count }} times">{{ entry_tag }}</a>
-    {% endfor %}
-    </p>
-  {% endif %}
+{% block container %}
+  <div id="headline">
+    <div class="span-13 prepend-2">
+      <h2 class="bottom">Archives</h2>
+      <hr>
+    </div>
+    <div class="span-2 last side_tr">
+      <a href="{% url shellfish_blog_entry_archive_index %}"><img src="{{ MEDIA_URL }}img/arr_top.png" title="Go to Frontpage"></a>
+    </div>
+  </div>
   
-  {% if object_list %}
-    <h3>By date</h3>
-    <dl>
-    {% for entry in object_list %}
-      {% ifchanged entry.created_at.month %}
-        <dt>{{ entry.created_at|date:"M Y" }}</dt>
-      {% endifchanged %}
-      <dd><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a></dd>
-    {% endfor %}
-    </dl>
-  {% endif %}
+  <div class="span-13 prepend-2">
+    <h3 id="archive_search">Search via Google</h3>
+    <form method="get" action="http://www.google.com/search" id="archive_search">
+      <p><input type="text" name="q" value="">
+      <input type="hidden" value="arthurkoziel.com" name="domains">
+      <input type="hidden" value="arthurkoziel.com" name="sitesearch">
+      <input type="submit" name="search" value="Go"></p>
+    </form>
+    
+    <hr>
+    
+    {% load tagging_tags %}
+    {% tag_cloud_for_model blog.Entry as entry_tags %}
+    {% if entry_tags %}
+      <h3>By tag</h3>
+      <p>
+      {% for entry_tag in entry_tags %}
+        <a class="size-{{ entry_tag.font_size }}" href="{% url tag_list entry_tag %}" title="Used {{ entry_tag.count }} times">{{ entry_tag }}</a>
+      {% endfor %}
+      </p>
+    {% endif %}
+    
+    <hr>
+  
+    {% if object_list %}
+      <h3>By date</h3>
+      <dl>
+      {% for entry in object_list %}
+        {% ifchanged entry.created_at.month %}
+          <dt>{{ entry.created_at|date:"M Y" }}</dt>
+        {% endifchanged %}
+        <dd><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a></dd>
+      {% endfor %}
+      </dl>
+    {% endif %}
+  </div>
 {% endblock %}

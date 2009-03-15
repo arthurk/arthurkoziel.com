@@ -2,23 +2,33 @@
 
 {% load tagging_tags humanize disqus_tags %}
 
-{% block content %}
-  {% block archive_title %}{% endblock %}
+{% block container %}
+  <div id="headline">
+    <div class="span-13 prepend-2">
+      {% block archive_title %}{% endblock %}
+    </div>
+    <div class="span-2 last side_tr">
+      <a href="{% url shellfish_blog_entry_archive_index %}"><img src="{{ MEDIA_URL }}img/arr_top.png" title="Go to Frontpage"></a>
+    </div>
+  </div>
   
-  {% for object in object_list %}
-    {% tags_for_object object as tags %}
-
-    <h2 class="bottom"><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></h2>
-    <p>
-      {{ object.created_at|naturalday|capfirst }} • 
-      <a href="{{ object.get_absolute_url }}#disqus_thread">View Comments</a>
-      {% if tags %}
-        •
-        {% for tag in tags %}
-          <a href="{% url tag_list tag %}">{{ tag }}</a>{% if not forloop.last %},{% endif %}
-        {% endfor %}
-      {% endif %}
-    </p>
-  {% endfor %}
+  <div class="span-13 prepend-2">
+    <dl>
+    {% for object in object_list %}
+      {% tags_for_object object as tags %}
+    
+      <dt><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></dt>
+      <dd>
+        {{ object.created_at|naturalday|capfirst }} • 
+        <a href="{{ object.get_absolute_url }}#disqus_thread">View Comments</a>
+        {% if tags %}
+          •
+          {% for tag in tags %}
+            <a href="{% url tag_list tag %}">{{ tag }}</a>{% if not forloop.last %},{% endif %}
+          {% endfor %}
+        {% endif %}
+      </dd>
+    {% endfor %}
+  </div>
 {% disqus_num_replies %}
 {% endblock %}

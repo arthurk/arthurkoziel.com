@@ -76,9 +76,14 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'django.contrib.sitemaps',
     'shellfish.blog',
-    'tagging',
     'disqus',
+    'tagging',
 )
+
+# Run `python -m smtpd -n -c DebuggingServer localhost:1025 ` to start a 
+# local email server on port 1025
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
 
 # django-disqus
 DISQUS_WEBSITE_SHORTNAME = ''

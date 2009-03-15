@@ -4,16 +4,26 @@
   {{ object.title }} —
 {% endblock %}
 
-{% block content %}  
+{% block container %}  
   {% if object.is_draft %}
     <div class="box">This page is currently unpublished.</div>
   {% endif %}
-
-  <h2 class="bottom">{{ object.title }}</h2>
-  <hr>
-  {% if object.body_html %}
-    {{ object.body_html|safe }}
-  {% else %}
-    {{ object.body|safe }}
-  {% endif %}
+  
+  <div id="headline">
+    <div class="span-13 prepend-2">
+      <h2 class="bottom">{{ object.title }}</h2>
+      <hr>
+    </div>
+    <div class="span-2 last side_tr">
+      <a href="{% url shellfish_blog_entry_archive_index %}"><img src="{{ MEDIA_URL }}img/arr_top.png" title="Go to Frontpage"></a>
+    </div>
+  </div>
+  
+  <div class="span-13 prepend-2">
+    {% if object.body_html %}
+      {{ object.body_html|safe }}
+    {% else %}
+      {{ object.body|safe }}
+    {% endif %}
+  </div>
 {% endblock %}

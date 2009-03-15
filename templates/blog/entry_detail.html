@@ -3,39 +3,52 @@
 {% load disqus_tags tagging_tags %}
 
 {% block pretitle %}{{ object.title }} —{% endblock %}
-{% block header_extra %}
-  <p class="quiet bottom">Published {{ object.created_at|date:"F j, Y" }}</p>
-  {% tags_for_object object as tags %}
-  <p class="quiet">Tagged as  
-  {% if tags %}
-    {% for tag in tags %}
-      <a href="{% url tag_list tag %}">{{ tag }}</a>{% if not forloop.last %},{% endif %}
-    {% endfor %}
-  {% endif %}
-  </p>
-{% endblock %}
 
-{% block content %}
+{% block container %}
   {% if object.is_draft %}
     <div class="box">This entry is currently unpublished.</div>
   {% endif %}
-  <div class="entry">
-    <h2 class="bottom">{{ object.title }}</h2>
-    <hr>
+  
+  <div id="headline">    
+    <div class="span-2">
+      {% if object.get_prev %}
+        <a href="{{ object.get_prev.get_absolute_url }}">
+          <img src="{{ MEDIA_URL }}img/arr_left.png" title="Previous Article" alt="Previous Article">
+        </a>
+      {% else %}
+      :-)
+      {% endif %}
+    </div>
+    <div class="span-13">
+      <h2 class="bottom">{{ object.title }}</h2>
+      <hr>
+    </div>
+    <div class="span-2 last side_tr">
+      <a href="{% url shellfish_blog_entry_archive_index %}"><img src="{{ MEDIA_URL }}img/arr_top.png" title="Go to Frontpage" alt="Go to Frontpage"></a>
+      {% if object.get_next %}
+        <a href="{{ object.get_next.get_absolute_url }}"><img src="{{ MEDIA_URL }}img/arr_right.png" title="Next Article" alt="Next Article"></a>
+      {% endif %}
+    </div>
+  </div>
+  
+  <div class="span-13 prepend-2">
     {% if object.body_html %}
       {{ object.body_html|safe }}
     {% else %}
       {{ object.body|safe }}
     {% endif %}
+    <hr class="bottom">
+    <p class="quiet bottom small">Published {{ object.created_at|date:"F j, Y" }} &bull; 
+     {% tags_for_object object as tags %}
+     Tagged as  
+     {% if tags %}
+       {% for tag in tags %}
+         <a href="{% url tag_list tag %}">{{ tag }}</a>{% if not forloop.last %},{% endif %}
+       {% endfor %}
+     {% endif %}
+     </p>
+    <hr>
+    <h3 id="comments">Comments</h3>
+    {% disqus_show_comments %}
   </div>
-  <hr>
-  <h3>Related Entries</h3>
-  <ul>
-  {% for related_entry in object.related %}
-    <li><a href="{{ related_entry.get_absolute_url }}">{{ related_entry }}</a></li>
-  {% endfor %}
-  </ul>
-  <hr>
-  <h3 id="comments">Comments</h3>
-  {% disqus_show_comments %}
 {% endblock %}

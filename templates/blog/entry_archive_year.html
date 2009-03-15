@@ -1,16 +1,8 @@
-{% extends "base.html" %}
+{% extends "blog/entry_archive.html" %}
 
 {% block pretitle %}Archive for {{ year }} —{% endblock %}
 
-{% block content %}
+{% block archive_title %}
 <h2 class="bottom">Archive for {{ year }}</h2>
 <hr>
-<dl>
-  {% for entry in object_list %}
-    {% ifchanged entry.created_at.month %}
-      <dt>{{ entry.created_at|date:"M" }}</dt>
-    {% endifchanged %}
-    <dd><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a></dd>
-  {% endfor %}
-</dl>
 {% endblock %}

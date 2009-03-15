@@ -8,7 +8,7 @@ def entry_detail(request, year, month, day, slug):
     
     This view is a wrapper around the generic ``date_based.object_detail`` 
     view.
-    """
+    """    
     return date_based.object_detail(request,
                                     year=year,
                                     month=month,
@@ -28,4 +28,5 @@ def page_detail(request, slug):
     return list_detail.object_detail(request,
                                      queryset=Page.objects.privileged(request.user),
                                      slug=slug,
-                                     template_name_field='template',)
+                                     template_name_field='template',
+                                     template_name='blog/page/default.html')

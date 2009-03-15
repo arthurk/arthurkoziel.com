@@ -17,10 +17,10 @@ feeds = {
 }
 
 sitemaps = {
-    'global': GlobalSitemap(),
-    'entries': EntrySitemap(),
-    'pages': PageSitemap(),
-    'tags': TagSitemap(),
+    'global': GlobalSitemap,
+    'entries': EntrySitemap,
+    'pages': PageSitemap,
+    'tags': TagSitemap,
 }
 
 # custom handler for HTTP 500 errors

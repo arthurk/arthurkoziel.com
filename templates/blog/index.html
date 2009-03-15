@@ -1,0 +1,33 @@
+{% extends "base_1col.html" %}
+
+{% load tagging_tags humanize disqus_tags %}
+
+{% block content %}
+  <div class="box">
+    <h1>Hi!</h1>
+    <p>My name is Arthur Koziel and this is my website where I write about <br>web development.</p>
+    <p>Feel free to browse the <a href="{% url shellfish_blog_archive %}">archives</a>, read more 
+      <a href="{% url shellfish_blog_page_detail "about" %}">about me</a>
+      or <br><a href="{% url shellfish_feeds "entries" %}">subscribe to the feed</a>.</p>
+  </div>
+  
+  <h2>Latest Articles</h2>
+  <dl>
+  {% for object in object_list %}
+    {% tags_for_object object as tags %}
+
+    <dt><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></dt>
+    <dd>
+      {{ object.created_at|naturalday|capfirst }} • 
+      <a href="{{ object.get_absolute_url }}#disqus_thread">View Comments</a>
+      {% if tags %}
+        •
+        {% for tag in tags %}
+          <a href="{% url tag_list tag %}">{{ tag }}</a>{% if not forloop.last %},{% endif %}
+        {% endfor %}
+      {% endif %}
+    </dd>
+  {% endfor %}
+  </dl>
+{% disqus_num_replies %}
+{% endblock %}
