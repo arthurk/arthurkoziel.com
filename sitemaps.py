@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 
 class GlobalSitemap(Sitemap):
     """
-    Sitemap that holds all global sites like the frontpage or archive.
+    Sitemap for static sites.
     """
     changefreq = "daily"
     page_urls = ('shellfish_blog_entry_archive_index', 

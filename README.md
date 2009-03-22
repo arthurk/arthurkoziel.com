@@ -1,36 +1,22 @@
-# Shellfish
-
 This is the source code of my blog at [arthurkoziel.com](http://arthurkoziel.com).
 
 ## Requirements
 
-- Python (2.5)
-- Django (1.0.2)
-- Markdown (2.0-beta, git rev be6891a22f6888af302392bc2dfa1e4a6099fd4f)
-- Pygments (1.0)
-- django-tagging (0.3-pre, svn rev 154)
-- django-disqus (http://github.com/arthurk/django-disqus)
+- Python 2.5
+- [Django](http://www.djangoproject.com/) 1.1 alpha 1
+- [Pygments](http://pygments.org/) 1.0
+- [python-markdown](http://www.freewisdom.org/projects/python-markdown/) 2.0-rc1
+- [django-tagging](http://code.google.com/p/django-tagging/) r154
+- [django-disqus](http://github.com/arthurk/django-disqus) trunk
 
 ## Installation
 
-1. Checkout the source code with `git clone git://github.com/arthurk/shellfish.git`.
+1. Clone the repository.
 2. Run `python manage.py syncdb` to initialize the database. Per default,
    a SQLite database will be created in the project directory.
 3. Start the development server by executing `python manage.py startserver`.
 4. Navigate to `http://localhost:8000/` in your web browser. The backend can
    be found at `http://localhost:8000/admin/`.
-
-## Apache Server Configuration
-
-To display the `robots.txt` and `favicon.ico` files, you need to disable the
-default handler (which would run those files through the Django engine) and 
-tell Apache to look for them on the local filesystem:
-
-    <Location ~ "/(robots.txt|favicon.ico)/">
-        SetHandler None
-    </Location>
-    alias /robots.txt /path/to/robots.txt 
-    alias /favicon.ico /path/to/favicon.ico
 
 ## Static Media
 
@@ -44,7 +30,7 @@ application on a production system you need to:
 
 ## Comments
 
-To enable comments you need to have [DISQUS](http://disqus.com) account and 
+To enable comments you need to have a [DISQUS](http://disqus.com) account and 
 a website registered with DISQUS. Edit the `settings_local.py` file and 
 assign the shortname of your website to the `DISQUS_WEBSITE_SHORTNAME` variable:
 

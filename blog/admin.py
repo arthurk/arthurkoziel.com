@@ -13,8 +13,10 @@ class EntryAdmin(admin.ModelAdmin):
         }),
     )
     
-    list_display = ('__unicode__', 'status', 'created_at',)
+    list_display = ('__unicode__', 'status', 'created_at', 'tags')
     list_filter = ('status', 'enable_comments', 'created_at')
+    list_editable = ('tags', )
+    
     prepopulated_fields = {"slug": ("title",)}
     search_fields = ['title',]
     
@@ -30,6 +32,7 @@ class PageAdmin(admin.ModelAdmin):
     
     list_display = ('__unicode__', 'status', 'created_at',)
     list_filter = ('status', 'created_at')
+    
     prepopulated_fields = {"slug": ("title",)}
     search_fields = ['title',]
 

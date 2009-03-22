@@ -16,7 +16,7 @@
           <img src="{{ MEDIA_URL }}img/arr_left.png" title="Previous Article" alt="Previous Article">
         </a>
       {% else %}
-      :-)
+      &nbsp;
       {% endif %}
     </div>
     <div class="span-13">
@@ -38,10 +38,10 @@
       {{ object.body|safe }}
     {% endif %}
     <hr class="bottom">
-    <p class="quiet bottom small">Published {{ object.created_at|date:"F j, Y" }} &bull; 
+    <p class="quiet bottom small">Published {{ object.created_at|date:"F j, Y" }}
      {% tags_for_object object as tags %}
-     Tagged as  
      {% if tags %}
+       • Tagged as  
        {% for tag in tags %}
          <a href="{% url tag_list tag %}">{{ tag }}</a>{% if not forloop.last %},{% endif %}
        {% endfor %}

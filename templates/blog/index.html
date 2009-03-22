@@ -20,12 +20,12 @@
     <dd>
       {{ object.created_at|naturalday|capfirst }} • 
       <a href="{{ object.get_absolute_url }}#disqus_thread">View Comments</a>
-      {% if tags %}
-        •
-        {% for tag in tags %}
-          <a href="{% url tag_list tag %}">{{ tag }}</a>{% if not forloop.last %},{% endif %}
-        {% endfor %}
-      {% endif %}
+      {% for tag in tags %}
+        {% if forloop.first %}
+          •
+        {% endif %}
+        <a href="{% url tag_list tag %}">{{ tag }}</a>{% if not forloop.last %},{% endif %}
+      {% endfor %}
     </dd>
   {% endfor %}
   </dl>

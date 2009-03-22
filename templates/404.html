@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_1col.html" %}
 
 {% block pretitle %}
   Page Not Found — 
@@ -12,13 +12,13 @@
   <p>You may have typed the address (URL) incorrectly. Check it to make sure you've got the exact right spelling, capitalization, etc.</p>
 
   <h3>Did you follow a link from somewhere else at this site?</h3>
-  <p>If you reached this page from another part of this site, please <a href="mailto:arthur@arthurkoziel.com">email me</a> so I can correct the mistake.</p>
+  <p>If you reached this page from another part of this site, please <a href="{% url shellfish_blog_page_detail "about" %}">email me</a> so I can correct the mistake.</p>
 
   <h3>Did you follow a link from another site?</h3>
-  <p>Links from other sites can sometimes be outdated or misspelled. <a href="mailto:arthur@arthurkoziel.com">Email me</a> where you came from and I can try to contact the other site in order to fix the problem.</p>
+  <p>Links from other sites can sometimes be outdated or misspelled. <a href="{% url shellfish_blog_page_detail "about" %}">Email me</a> where you came from and I can try to contact the other site in order to fix the problem.</p>
 
   <ul>
   	<li><a href="javascript:history.go(-1)">Go back a page</a></li>
-  	<li><a href="http://arthurkoziel.com">Visit the home page</a></li>
+  	<li><a href="{% url shellfish_blog_entry_archive_index %}">Visit the home page</a></li>
   </ul>
 {% endblock %}
